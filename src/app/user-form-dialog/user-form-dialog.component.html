@@ -1,0 +1,88 @@
+<h1 mat-dialog-title>{{ formTitle }}</h1>
+
+<div mat-dialog-content class="form-size">
+  <form class="login-form data-form" [formGroup]="form">
+    <div>
+      <mat-form-field class="fullWidth form-size" appearance="outline">
+        <mat-label>Name *</mat-label>
+        <input matInput type="text" name="name" formControlName="name" />
+        <mat-error *ngIf="form.controls['name']?.errors?.required"
+          >Name required</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="mt-5">
+      <mat-form-field class="fullWidth form-size" appearance="outline">
+        <mat-label>Date of Birth *</mat-label>
+        <input
+          matInput
+          [matDatepicker]="dateOfBirth"
+          formControlName="dateOfBirth"
+        />
+        <mat-datepicker-toggle matSuffix [for]="dateOfBirth">
+        </mat-datepicker-toggle>
+        <mat-datepicker #dateOfBirth></mat-datepicker>
+        <mat-error *ngIf="form.controls['dateOfBirth']?.errors?.required"
+          >Date of Birth required</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="mt-5" style="margin-bottom: 5%">
+      <mat-radio-group
+        class="fullWidth form-size"
+        formControlName="gender"
+        appearance="outline"
+      >
+        <mat-radio-button value="male" style="margin-right: 5%"
+          >Male</mat-radio-button
+        >
+
+        <mat-radio-button value="female">Female</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="mt-5">
+      <mat-form-field class="fullWidth form-size" appearance="outline">
+        <mat-label>Job *</mat-label>
+        <mat-select name="job" formControlName="job">
+          <mat-option value="Software Developer">Software Developer</mat-option>
+          <mat-option value="Physician">Physician</mat-option>
+          <mat-option value="Dentist">Dentist</mat-option>
+          <mat-option value="Nurse">Nurse</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['job']?.errors?.required"
+          >Please select Job
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mt-5">
+      <mat-form-field class="fullWidth form-size" appearance="outline">
+        <mat-label>Description *</mat-label>
+        <textarea
+          matInput
+          placeholder="Description"
+          formControlName="description"
+        >
+        </textarea>
+        <mat-error *ngIf="form.controls['description']?.errors?.required"
+        >Description required</mat-error
+      >
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<mat-dialog-actions>
+  <button
+      mat-raised-button
+      style="width: 20%; padding-bottom: 0%;"
+      color="primary"
+      [disabled]="!form.valid"
+      (click)="save()"
+    >
+      Save
+    </button>
+    <button mat-raised-button mat-dialog-close style=" margin-left: 5%; width: 20%;">No</button>
+</mat-dialog-actions>
